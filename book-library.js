@@ -2,7 +2,37 @@ let myLibrary = [];
 
 const books = document.querySelector('#allBooks')
 const newBook = document.querySelector('#addNewBook');
-newBook.addEventListener('click', () => addBookToLibrary())
+const modalForm = document.querySelector('form')
+const overlay = document.getElementById('overlay')
+const exitModal = document.getElementById('x')
+exitModal.addEventListener('click', ()=> {
+    modalForm.reset()
+    closeModalForm()
+})
+newBook.addEventListener('click', () => openModalForm())
+
+modalForm.addEventListener('submit', submittedInfo)
+
+function submittedInfo(e) {
+    e.preventDefault()
+    const bookName = document.getElementById('bookName').value
+    const bookAuthor = document.getElementById('bookAuthor').value
+    const pages = document.getElementById('pages').value
+    const read = document.getElementById('read').checked
+    addBookToLibrary(bookName, bookAuthor, pages, read)
+    modalForm.reset()
+    closeModalForm()
+}
+
+function openModalForm() {
+    modalForm.classList.add('active')
+    overlay.classList.add('active')
+}
+
+function closeModalForm() {
+    modalForm.classList.remove('active')
+    overlay.classList.remove('active')
+}
 
 function Book(title, author, pages, readOrNot) {
      this.title = title;
@@ -18,24 +48,7 @@ function removeLib(){
     return
 }
 
-function addBookToLibrary() {
-    const title = prompt('What is the Title of the Book?');
-    const author = prompt('who is the author of this book?');
-    let pages = prompt('How many pages are in this book?');
-    while (isNaN(pages)){
-        alert('This must  be a Number!')
-        pages = prompt('How many pages are in this book?')
-    }
-    let readOrNot = prompt('Have you read this book? Y or N').toLowerCase()
-    while (readOrNot !== 'y' && readOrNot !== 'n'){
-        alert('Please enter Y or N')
-        readOrNot = prompt('Have you read this book? Y or N').toLowerCase()
-    }
-    if (readOrNot === 'y'){
-        readOrNot = true
-    } else {
-        readOrNot = false
-    }
+function addBookToLibrary(title, author, pages, readOrNot) {
     let book = new Book(title, author, pages, readOrNot)
     removeLib()
     myLibrary.push(book)

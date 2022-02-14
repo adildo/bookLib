@@ -64,3 +64,66 @@ input {
     font-size: 18px;
     border-radius: 5px;
 }
+
+form input {
+    width: 120px;
+}
+
+form {
+    background-color: white;
+    z-index: 10;
+    padding: 15px;
+    border: solid;
+    border-radius: 10px;
+    width: 170px;
+    transform: translate(-50%, -50%) scale(0);
+    transition:  transform 500ms ease-in-out;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    
+}
+
+form.active {
+    transform: translate(-50%, -50%) scale(1);
+    display: block;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+#overlay {
+    position: fixed;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transition: opacity 300mx ease-in-out;
+    background-color: rgb(109, 99, 99, 0.7);
+    pointer-events: none;
+}
+
+#overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+form label {
+    font-size: 24px;
+    
+}
+
+form #x{
+    background: none;
+    border: none;
+    color: red;
+    align-self: flex-end;
+}
+
+#submit {
+    background-color: green;
+    font-size: 22px;
+    padding: 2px 15px;
+    border-radius: 16px;
+}
